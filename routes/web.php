@@ -11,32 +11,30 @@ Route::view('/', 'welcome')->name('home');
 Route::prefix('info')->group(function () {
 
     // About
-    Route::get('/about', function () {
-        return 'Laundry Care adalah layanan laundry yang membantu pelanggan merawat pakaian dengan mudah dan praktis.';
-    })->name('about');
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
 
     // Program
-    Route::get('/program', function () {
-        return 'Program Laundry Care: Cuci Kering, Cuci Setrika, dan Express Laundry.';
-    })->name('program');
+Route::get('/program', function () {
+    return view('program');
+})->name('program');
 
     // Our Team
-    Route::get('/team', function () {
-        return 'Our Team - Tim Laundry Care siap memberikan pelayanan terbaik.';
-    })->name('team');
+Route::get('/team', function () {
+    return view('team');
+})->name('team');
 
     // Contact Us
-    Route::get('/contact', function () {
-        return 'Contact Us - Hubungi Laundry Care melalui WhatsApp.';
-    })->name('contact');
-});
-
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');});
 
 // Route dengan parameter
 Route::get('/customer/{name}', function ($name) {
-    return 'Selamat datang, ' . $name . '!';
-});
-
+    return view('customer', [
+        'name' => $name
+    ]);});
 
 // Redirect
 Route::redirect('/kontak', '/info/contact');
@@ -52,7 +50,7 @@ Route::prefix('{current_team}')
 
 // Fallback
 Route::fallback(function () {
-    return 'Halaman yang kamu cari tidak ditemukan.';
+    return view('404');
 });
 
 
