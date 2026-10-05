@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Contact Us - Laundry Care</title>
-</head>
-<body>
+@extends('layouts.app')
 
-    <h1>Contact Us</h1>
+@section('title', 'Contact Us')
 
-    <p>
-        Hubungi Laundry Care untuk mendapatkan informasi
-        mengenai layanan dan pemesanan laundry.
-    </p>
-
-    <h2>Kontak Kami</h2>
-
-    <p>WhatsApp: 0812-3456-7890</p>
-    <p>Email: laundrycare@example.com</p>
-    <p>Alamat: Jl. Contoh No. 10, Indonesia</p>
-
-    <a href="/">Kembali ke Home</a>
-
-</body>
-</html>
+@section('content')
+<h2>Hubungi Kami</h2>
+<form class="mt-3">
+    <div class="mb-3">
+        <label class="form-label">Nama</label>
+        <input type="text" class="form-control" placeholder="Masukkan nama Anda">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" placeholder="nama@email.com">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Pesan</label>
+        <textarea class="form-control" rows="4" placeholder="Tuliskan pesan Anda"></textarea>
+    </div>
+    <button type="button" class="btn btn-primary">Kirim Pesan</button>
+</form>
+@endsection

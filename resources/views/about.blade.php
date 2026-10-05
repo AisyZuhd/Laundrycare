@@ -1,31 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>About - Laundry Care</title>
-</head>
-<body>
+@extends('layouts.app')
 
-    <h1>About Laundry Care</h1>
+@section('title', 'About Us')
 
-    <p>
-        Laundry Care adalah layanan laundry yang membantu
-        pelanggan merawat pakaian dengan mudah dan praktis.
-    </p>
-
-    <p>
-        Kami menyediakan layanan laundry yang bersih,
-        cepat, dan terpercaya untuk memenuhi kebutuhan pelanggan.
-    </p>
-
-    <h2>Layanan Kami</h2>
-
-    <ul>
-        <li>Cuci Kering</li>
-        <li>Cuci Setrika</li>
-        <li>Express Laundry</li>
-    </ul>
-
-    <a href="/">Kembali ke Home</a>
-
-</body>
-</html>
+@section('content')
+<h2>Tentang Laundrycare</h2>
+<p class="lead">Laundrycare adalah platform khusus yang didedikasikan untuk memberikan perawatan sepatu terbaik dengan teknik modern dan bahan berkualitas.</p>
+@endsection

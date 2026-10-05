@@ -1,27 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Our Team - Laundry Care</title>
-</head>
-<body>
+@extends('layouts.app')
 
-    <h1>Our Team</h1>
+@section('title', 'Our Team')
 
-    <p>
-        Laundry Care didukung oleh tim yang siap
-        memberikan pelayanan terbaik kepada pelanggan.
-    </p>
-
-    <h2>Tim Laundry Care</h2>
-
-    <ul>
-        <li>Customer Service</li>
-        <li>Tim Laundry</li>
-        <li>Quality Control</li>
-        <li>Delivery Team</li>
-    </ul>
-
-    <a href="/">Kembali ke Home</a>
-
-</body>
-</html>
+@section('content')
+<h2 class="mb-4 text-center">Tim Kami</h2>
+<div class="row justify-content-center">
+    <div class="col-md-4 text-center">
+        <div class="card p-3">
+            <div class="card-body">
+                <h4 class="card-title">Aisy</h4>
+                <p class="text-muted">Frontend Developer</p>
+                <p>NIM: [Isi NIM Kamu Di Sini]</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 text-center">
+        <div class="card p-3">
+            <div class="card-body">
+                <h4 class="card-title">Siti</h4>
+                <p class="text-muted">Backend Developer</p>
+                <p>NIM: [Isi NIM Siti Di Sini]</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

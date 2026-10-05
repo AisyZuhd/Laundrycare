@@ -1,36 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Program - Laundry Care</title>
-</head>
-<body>
+@extends('layouts.app')
 
-    <h1>Program Laundry Care</h1>
+@section('title', 'Program Kami')
 
-    <p>
-        Laundry Care menyediakan beberapa program
-        untuk memenuhi kebutuhan laundry pelanggan.
-    </p>
-
-    <h2>Cuci Kering</h2>
-    <p>
-        Layanan mencuci dan mengeringkan pakaian
-        agar pakaian siap digunakan kembali.
-    </p>
-
-    <h2>Cuci Setrika</h2>
-    <p>
-        Pakaian dicuci, dikeringkan, dan disetrika
-        hingga siap digunakan.
-    </p>
-
-    <h2>Express Laundry</h2>
-    <p>
-        Layanan laundry dengan proses pengerjaan
-        yang lebih cepat.
-    </p>
-
-    <a href="/">Kembali ke Home</a>
-
-</body>
-</html>
+@section('content')
+<h2 class="mb-4">Layanan & Program</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Deep Cleaning</h5>
+                <p class="card-text">Pembersihan menyeluruh hingga ke bagian terdalam sepatu.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Unyellowing</h5>
+                <p class="card-text">Mengembalikan warna midsole sepatu yang menguning kembali cerah.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Repaint & Repair</h5>
+                <p class="card-text">Pengecatan ulang dan perbaikan bagian sepatu yang rusak.</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
