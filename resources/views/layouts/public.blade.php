@@ -6,8 +6,7 @@
     <title>Laundrycare - @yield('title')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="flex min-h-screen flex-col bg-white text-neutral-800 antialiased">
-
+<body class="flex min-h-screen flex-col antialiased @yield('body-class', 'bg-slate-50 text-neutral-800')">
     @include('partials.navbar')
 
     <main class="container-page flex-1 py-12">
