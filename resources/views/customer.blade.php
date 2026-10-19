@@ -1,3 +1,5 @@
+@extends('layouts.public')
+
 <!DOCTYPE html>
 <html>
 <head>
