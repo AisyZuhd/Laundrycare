@@ -4,6 +4,12 @@
 
 @section('content')
 
+@if (session('status'))
+    <div class="mb-6 rounded-lg border border-green-300 bg-green-50 px-4 py-3 text-center text-sm font-medium text-green-700">
+        {{ session('status') }}
+    </div>
+@endif
+
 @php
     $categories = [
         ['icon' => 'spons.png', 'title' => 'Perawatan Sepatu', 'desc' => 'Deep clean, unyellowing, repaint dan perbaikan untuk semua jenis bahan.', 'bg' => 'bg-pink-100'],
@@ -116,7 +122,7 @@
 <section class="mt-16 text-center">
     <h2 class="text-2xl font-bold">Siap bikin pakaian dan sepatumu kinclong?</h2>
     <p class="mt-2 text-neutral-500">Hubungi kami sekarang dan dapatkan konsultasi gratis.</p>
-    <a href="{{ route('contact') }}" class="btn-primary mt-6">Pesan Sekarang</a>
+    <a href="{{ route('order.create') }}" class="btn-primary mt-6">Pesan Sekarang</a>
 </section>
 
 @endsection
