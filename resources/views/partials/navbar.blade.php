@@ -50,6 +50,13 @@
                 </li>
             @endif           
             @if (auth()->check() && auth()->user()->role === 'admin')
+                            <li>
+                    <a href="{{ route('admin.customers') }}"
+                       class="block rounded-lg px-4 py-2 text-sm font-medium transition hover:bg-white/10
+                              {{ request()->routeIs('admin.customers') ? 'bg-white/20' : '' }}">
+                        Pelanggan
+                    </a>
+                </li>
                 <li class="md:ml-3">
                     <a href="{{ route('admin.dashboard') }}"
                        class="block rounded-lg border border-white/50 bg-white/10 px-4 py-2 text-center text-sm font-semibold backdrop-blur transition hover:bg-white/25">

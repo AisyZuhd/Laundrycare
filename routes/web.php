@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,18 @@ Route::get('/admin/dashboard', [OrderController::class, 'index'])
 Route::patch('/admin/pesanan/{order}/status', [OrderController::class, 'updateStatus'])
     ->middleware(['auth', 'role:admin'])
     ->name('admin.order.status');
+
+Route::delete('/admin/pesanan/{order}', [OrderController::class, 'destroy'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.order.destroy');
+
+Route::get('/admin/pelanggan', [UserController::class, 'index'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.customers');
+
+Route::delete('/admin/pelanggan/{user}', [UserController::class, 'destroy'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.customers.destroy');
 
 // Route dengan parameter (harus setelah dashboard customer)
 Route::get('/customer/{name}', function ($name) {

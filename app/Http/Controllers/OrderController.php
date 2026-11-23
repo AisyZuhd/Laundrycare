@@ -86,4 +86,14 @@ class OrderController extends Controller
 
         return view('my-orders', ['orders' => $orders]);
     }
+    
+    /**
+     * Admin menghapus pesanan (soft delete).
+     */
+    public function destroy(Order $order): RedirectResponse
+    {
+        $order->delete();
+
+        return back()->with('status', "Pesanan #{$order->id} dihapus.");
+    }
 }

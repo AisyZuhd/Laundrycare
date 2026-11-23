@@ -87,9 +87,20 @@
                                     Selesai
                                 </button>
                             </form>
-                        @else
+                                                @else
                             <span class="text-xs text-neutral-400">-</span>
                         @endif
+
+                        <form method="POST" action="{{ route('admin.order.destroy', $order) }}"
+                              class="mt-2"
+                              onsubmit="return confirm('Hapus pesanan #{{ $order->id }}?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="rounded-lg bg-red-500 px-3 py-1 text-xs font-semibold text-white hover:bg-red-600">
+                                Hapus
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @empty
