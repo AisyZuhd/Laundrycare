@@ -16,6 +16,24 @@
 </div>
 
 <div class="mt-10 overflow-x-auto rounded-xl border border-neutral-200 bg-white shadow-sm">
+            <div class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
+            <div class="card text-center">
+                <p class="text-3xl font-bold">{{ $orders->count() }}</p>
+                <p class="text-sm text-neutral-500">Total Pesanan</p>
+            </div>
+            @foreach (['menunggu', 'diterima', 'diproses', 'selesai'] as $status)
+                <div class="card text-center">
+                    <p class="text-3xl font-bold">{{ $perStatus->get($status, 0) }}</p>
+                    <p class="text-sm text-neutral-500">{{ ucfirst($status) }}</p>
+                </div>
+            @endforeach
+        </div>
+
+        <p class="mt-4 text-center text-sm text-neutral-500">
+            @foreach ($perKategori as $kategori => $jumlah)
+                {{ $kategori }}: {{ $jumlah }} pesanan @if (! $loop->last) &middot; @endif
+            @endforeach
+        </p>
     <table class="w-full text-left text-sm">
         <thead class="bg-neutral-100 text-xs uppercase text-neutral-600">
             <tr>

@@ -1,25 +1,33 @@
 @extends('layouts.public')
 
-@section('title', 'Book Online')
+@php $order = $order ?? null; @endphp
+
+@section('title', $order ? 'Edit Pesanan' : 'Book Online')
 
 @section('content')
 
 <div class="text-center">
-    <h1 class="text-4xl font-bold">Book Online</h1>
-    <p class="mt-3 text-neutral-500">Isi form di bawah ini untuk memesan layanan laundry atau cuci sepatu.</p>
+    <h1 class="text-4xl font-bold">{{ $order ? 'Edit Pesanan #'.$order->id : 'Book Online' }}</h1>
+    <p class="mt-3 text-neutral-500">
+        {{ $order ? 'Ubah data pesananmu selama belum diterima admin.' : 'Isi form di bawah ini untuk memesan layanan laundry atau cuci sepatu.' }}
+    </p>
 </div>
 
-<form method="POST" action="{{ route('order.store') }}" class="card mx-auto mt-10 max-w-lg space-y-5">
+<form method="POST"
+      action="{{ $order ? route('order.update', $order) : route('order.store') }}"
+      class="card mx-auto mt-10 max-w-lg space-y-5">
     @csrf
+    @if ($order)
+        @method('PUT')
+    @endif
 
-    {{-- Kategori --}}
     <div>
         <label for="kategori" class="mb-1 block text-sm font-medium">Kategori</label>
         <select id="kategori" name="kategori" required
                 class="w-full rounded-lg border border-neutral-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">
             <option value="">-- Pilih kategori --</option>
             @foreach ($daftarLayanan as $kategori => $layananList)
-                <option value="{{ $kategori }}" @selected(old('kategori') === $kategori)>{{ $kategori }}</option>
+                <option value="{{ $kategori }}" @selected(old('kategori', $order->kategori ?? '') === $kategori)>{{ $kategori }}</option>
             @endforeach
         </select>
         @error('kategori')
@@ -27,7 +35,6 @@
         @enderror
     </div>
 
-    {{-- Layanan --}}
     <div>
         <label for="layanan" class="mb-1 block text-sm font-medium">Layanan</label>
         <select id="layanan" name="layanan" required
@@ -39,45 +46,41 @@
         @enderror
     </div>
 
-    {{-- Jumlah --}}
     <div>
         <label for="jumlah" class="mb-1 block text-sm font-medium">
             Jumlah <span id="satuan" class="text-neutral-500">(kg / pasang)</span>
         </label>
         <input id="jumlah" type="number" name="jumlah" min="1" max="100" required
-               value="{{ old('jumlah') }}"
+               value="{{ old('jumlah', $order->jumlah ?? '') }}"
                class="w-full rounded-lg border border-neutral-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">
         @error('jumlah')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror
     </div>
 
-    {{-- No telepon --}}
     <div>
         <label for="no_telepon" class="mb-1 block text-sm font-medium">No. Telepon / WhatsApp</label>
-        <input id="no_telepon" type="text" name="no_telepon" required
-               value="{{ old('no_telepon') }}" placeholder="08xxxxxxxxxx"
+        <input id="no_telepon" type="text" name="no_telepon" required placeholder="08xxxxxxxxxx"
+               value="{{ old('no_telepon', $order->no_telepon ?? '') }}"
                class="w-full rounded-lg border border-neutral-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">
         @error('no_telepon')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror
     </div>
 
-    {{-- Alamat --}}
     <div>
         <label for="alamat" class="mb-1 block text-sm font-medium">Alamat Jemput / Antar</label>
         <textarea id="alamat" name="alamat" rows="3" required
-                  class="w-full rounded-lg border border-neutral-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">{{ old('alamat') }}</textarea>
+                  class="w-full rounded-lg border border-neutral-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">{{ old('alamat', $order->alamat ?? '') }}</textarea>
         @error('alamat')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror
     </div>
 
-    {{-- Catatan --}}
     <div>
         <label for="catatan" class="mb-1 block text-sm font-medium">Catatan (opsional)</label>
         <textarea id="catatan" name="catatan" rows="2"
-                  class="w-full rounded-lg border border-neutral-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">{{ old('catatan') }}</textarea>
+                  class="w-full rounded-lg border border-neutral-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">{{ old('catatan', $order->catatan ?? '') }}</textarea>
         @error('catatan')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
         @enderror
@@ -85,14 +88,13 @@
 
     <button type="submit"
             class="w-full rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700">
-        Kirim Pesanan
+        {{ $order ? 'Simpan Perubahan' : 'Kirim Pesanan' }}
     </button>
 </form>
 
 <script>
-    // Daftar layanan per kategori, diambil dari controller
     const daftarLayanan = @json($daftarLayanan);
-    const layananLama = @json(old('layanan'));
+    const layananLama = @json(old('layanan', $order->layanan ?? null));
 
     const kategoriEl = document.getElementById('kategori');
     const layananEl = document.getElementById('layanan');

@@ -3,6 +3,11 @@
 @section('title', 'Pesanan Saya')
 
 @section('content')
+@if (session('status'))
+    <div class="mb-6 rounded-lg border border-green-300 bg-green-50 px-4 py-3 text-center text-sm font-medium text-green-700">
+        {{ session('status') }}
+    </div>
+@endif
 
 <div class="text-center">
     <h1 class="text-4xl font-bold">Pesanan Saya</h1>
@@ -50,6 +55,12 @@
             </p>
 
             <p class="mt-2 text-sm text-neutral-500">Alamat: {{ $order->alamat }}</p>
+                @if ($order->status === 'menunggu')
+                    <a href="{{ route('order.edit', $order) }}"
+                    class="mt-3 inline-block rounded-lg bg-blue-600 px-3 py-1 text-xs font-semibold text-white hover:bg-blue-700">
+                        Edit Pesanan
+                    </a>
+                @endif
         </div>
     @empty
         <div class="card text-center text-neutral-500">

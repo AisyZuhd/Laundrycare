@@ -19,11 +19,6 @@ Route::prefix('info')->group(function () {
 // Redirect
 Route::redirect('/kontak', '/info/contact');
 
-// Dashboard Customer
-Route::view('/customer/dashboard', 'customer-dashboard')
-    ->middleware(['auth', 'role:customer'])
-    ->name('customer.dashboard');
-
 // Dashboard Admin
 Route::get('/admin/dashboard', [OrderController::class, 'index'])
     ->middleware(['auth', 'role:admin'])
@@ -45,16 +40,13 @@ Route::delete('/admin/pelanggan/{user}', [UserController::class, 'destroy'])
     ->middleware(['auth', 'role:admin'])
     ->name('admin.customers.destroy');
 
-// Route dengan parameter (harus setelah dashboard customer)
-Route::get('/customer/{name}', function ($name) {
-    return view('customer', ['name' => $name]);
-})->name('customer');
-
 // Form pesan laundry (hanya pelanggan yang sudah login)
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/pesan', [OrderController::class, 'create'])->name('order.create');
     Route::post('/pesan', [OrderController::class, 'store'])->name('order.store');
     Route::get('/pesanan-saya', [OrderController::class, 'myOrders'])->name('order.mine');
+    Route::get('/pesanan/{order}/edit', [OrderController::class, 'edit'])->name('order.edit');
+    Route::put('/pesanan/{order}', [OrderController::class, 'update'])->name('order.update');
 });
 
 // Dashboard bawaan project
